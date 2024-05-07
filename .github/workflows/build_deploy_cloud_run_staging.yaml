@@ -53,11 +53,11 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          service: ${{ vars.CLOUDRUN_SERVICE }}
           region: ${{ vars.GCP_REGION }}
-          image: ${{ vars.GCP_AR_REGISTRY }}/${{ vars.GCP_PROJECT }}/${{ vars.GCP_AR_REPO }}/${{ vars.IMAGE_NAME }}:${{ github.sha }}
+          image: ${{ vars.GCP_AR_REGISTRY }}/${{ vars.GCP_PROJECT }}/${{ vars.GCP_AR_REPO }}/${{ vars.IMAGE_NAME }}:${{ env.TARGET }}
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
